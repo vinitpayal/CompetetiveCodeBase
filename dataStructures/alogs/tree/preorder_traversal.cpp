@@ -1,5 +1,6 @@
 #include<iostream>
 #include<stdlib.h>
+#include<stack>
 using namespace std;
 
 
@@ -8,6 +9,9 @@ struct BinaryTreeNode{
 	struct BinaryTreeNode *left;
 	struct BinaryTreeNode *right;
 };
+
+stack<BinaryTreeNode*> nodeStack;
+
 /**
  Function to create a new node 
 **/
@@ -36,6 +40,7 @@ struct BinaryTreeNode* BSTInsertion(struct BinaryTreeNode * root, int insertData
 }
 
 void preOrder(struct BinaryTreeNode *node){
+
 	if(node){
 		cout<<node->data<<" ";
 		preOrder(node->left);
@@ -43,10 +48,34 @@ void preOrder(struct BinaryTreeNode *node){
 	}
 }
 
+void preOrderWithOutRecursion(struct BinaryTreeNode *root){
+	while(1){
+		while(root){
+			cout<<root->data<<" ";
+			nodeStack.push(root);
+			root = root->left;
+
+		}
+
+		if(!nodeStack.empty()){
+			root = nodeStack.top();
+			nodeStack.pop();
+
+			// cout<<root->data<<" ";
+
+			root = root->right;
+		}else{
+			break;
+		}
+
+	}	
+}
+
 int main()
 {
 	struct BinaryTreeNode *root = NULL;
     root = BSTInsertion(root, 50);
+	
     BSTInsertion(root, 30);
     BSTInsertion(root, 20);
     BSTInsertion(root, 40);
@@ -54,7 +83,7 @@ int main()
     BSTInsertion(root, 60);
     BSTInsertion(root, 80);
 
-    preOrder(root);
+    preOrderWithOutRecursion(root);
 
 	return 0;
 }
