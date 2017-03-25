@@ -83,7 +83,11 @@ int main()
     BSTInsertion(root, 60);
     BSTInsertion(root, 80);
 
+    cout<<"-------Pre Order Witout Recursion-------"<<endl;
     preOrderWithOutRecursion(root);
+
+    cout<<endl<<"------------preOrder with Recursion------"<<endl;
+    preOrder(root);
 
 	return 0;
 }
