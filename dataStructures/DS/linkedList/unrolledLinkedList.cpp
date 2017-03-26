@@ -157,11 +157,11 @@ int main(){
 	blockSize = 4;
 	addElement(0,1);
 	addElement(1,2);
-	addElement(1,12);
+	// addElement(1,12);
 
 	addElement(2,3);
 	addElement(3,4);
-	addElement(1,11);
+	// addElement(1,11);
 	addElement(4,5);
 	addElement(5,6);
 	addElement(6,7);
