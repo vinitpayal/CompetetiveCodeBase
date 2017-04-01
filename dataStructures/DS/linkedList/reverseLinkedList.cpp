@@ -40,10 +40,17 @@ void insertAtLast(int value){
 	}
 }
 
-void reverseLLInK(struct node* start,struct node* lastBlockLastNode, int k){
-
-	if(start){
+void reverseLLInK(struct node* start){
+	struct node* curr = start;
+	struct node* prev = NULL;
+	struct node* next = NULL; 
+	while(curr){
+		next = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = next;
 	}
+	head = prev;
 }	
 
 int main(){
@@ -58,12 +65,12 @@ int main(){
 	insertAtLast(18);
 
 
-	cout<<"Before Reversing"<<endl;
+	cout<<"Before Reversing\n";
 	printLinkedList();
 
-	reverseLLInK(head,NULL,3);
+	reverseLLInK(head);
 
-	cout<<"After Reversing"<<endl;
+	cout<<"\nAfter Reversing\n";
 	printLinkedList();
 
 	
