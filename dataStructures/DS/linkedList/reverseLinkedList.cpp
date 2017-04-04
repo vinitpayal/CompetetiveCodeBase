@@ -40,7 +40,8 @@ void insertAtLast(int value){
 	}
 }
 
-void reverseLLInK(struct node* start){
+void reverseLLInK(){
+	struct node* start = head;
 	struct node* curr = start;
 	struct node* prev = NULL;
 	struct node* next = NULL; 
@@ -52,6 +53,17 @@ void reverseLLInK(struct node* start){
 	}
 	head = prev;
 }	
+
+struct node* recursiveReverse(struct node* current,struct node* prev){
+	struct node* next = current->next;
+	current->next = prev;
+	if(next){
+		recursiveReverse(next, current);
+	}
+	else{
+		return current; 
+	}
+}
 
 int main(){
 	insertAtLast(10);
@@ -68,7 +80,8 @@ int main(){
 	cout<<"Before Reversing\n";
 	printLinkedList();
 
-	reverseLLInK(head);
+	// reverseLLInK();
+	head = recursiveReverse(head, NULL);
 
 	cout<<"\nAfter Reversing\n";
 	printLinkedList();

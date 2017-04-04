@@ -1,6 +1,7 @@
 #include<iostream>
 #include<stdlib.h>
 #include<stack>
+#include<climits>
 using namespace std;
 
 
@@ -10,7 +11,6 @@ struct BinaryTreeNode{
 	struct BinaryTreeNode *right;
 };
 
-stack<BinaryTreeNode*> nodeStack;
 
 /**
  Function to create a new node 
@@ -48,28 +48,14 @@ void preOrder(struct BinaryTreeNode *node){
 	}
 }
 
-void preOrderWithOutRecursion(struct BinaryTreeNode *root){
-	while(1){
-		while(root){
-			cout<<root->data<<" ";
-			nodeStack.push(root);
-			root = root->left;
+bool isBST(struct BinaryTreeNode* root, int min, int max){
+	if(root == NULL) return true;
 
-		}
+	if(root->data < min && root->data > max) return false;
 
-		if(!nodeStack.empty()){
-			root = nodeStack.top();
-			nodeStack.pop();
-
-			// cout<<root->data<<" ";
-
-			root = root->right;
-		}else{
-			break;
-		}
-
-	}	
+	return isBST(root->left, min, root->data - 1) && isBST(root->right, root->data+1, max);
 }
+
 
 int main()
 {
@@ -83,11 +69,10 @@ int main()
     BSTInsertion(root, 60);
     BSTInsertion(root, 80);
 
-    cout<<"-------Pre Order Witout Recursion-------"<<endl;
-    preOrderWithOutRecursion(root);
-
-    cout<<endl<<"------------preOrder with Recursion------"<<endl;
+    cout<<"Preorder of tree\n";
     preOrder(root);
+
+    cout<<"\n------------------\nIS BST:"<<isBST(root, INT_MIN, INT_MAX)<<"\n-------------------\n";
 
 	return 0;
 }
