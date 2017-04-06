@@ -8,7 +8,7 @@ class HeapDS
 	// void insert();
 	// void delete();
 	 public:
-	 	 int size=0;
+	 	 int size;
 		 int heapArray[1000002];
 		 int getMinElement(HeapDS &heap){
 		 	return heap.heapArray[1];
