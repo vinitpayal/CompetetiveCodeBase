@@ -1,17 +1,8 @@
-/**
-	Can be run at -> https://repl.it/HApF/0 as to_string is not working on local currently
-	 bcz of g++ version
-**/
-/**
-	https://repl.it/HAqy
-**/
-#include <iostream>
-#include <stdlib.h>
-#include <stack>
-#include <climits>
-#include <queue>
-#include <string> 
-
+#include<iostream>
+#include<stdlib.h>
+#include<stack>
+#include<climits>
+#include<queue>
 using namespace std;
 
 
@@ -58,43 +49,21 @@ void preOrder(struct BinaryTreeNode *node){
 	}
 }
 
-bool pathWithGivenSum(struct BinaryTreeNode* root, int sum, string s){
+void mirrorTree(struct BinaryTreeNode* root){
 
-	int effectiveSum = sum;
-	int ans = 0;
+	if(root){
+		struct BinaryTreeNode* temp = root->left;
+		root->left = root->right;
+		root->right = temp;
 
-	if(root == NULL) return (sum == 0);
-	// cout<<"Called "<<root->data<<" with sum left :"<<sum;
-	
-	sum -= root->data;
-
-	// s += (std::to_string(root->data) + "->");
-
-	// cout<<" on leaving :"<<sum<<"\n";
-	if(root->left == NULL && root->right == NULL) {if(sum == 0) cout<<s<<endl;return (sum == 0);}
-
-	if(root->left) ans = ans || pathWithGivenSum(root->left, sum, s);
-	if(root->right) ans = ans || pathWithGivenSum(root->right, sum, s);
-
-	return ans;
+		mirrorTree(root->left);
+		mirrorTree(root->right);
+	}
 }
 
-void printAllRootToLeadPaths(struct BinaryTreeNode* root, string s){
-	if(!root) return;
-
-	s += (to_string(root->data) + "->");
-	if(root->left == NULL && root->right == NULL) {
-	  cout<<s<<"\n";
-	  return;
-	};
-  
-  printAllRootToLeadPaths(root->left, s);
-  printAllRootToLeadPaths(root->right, s);
-}
 
 int main()
 {
-	// string s = to_string(42);
 	struct BinaryTreeNode *root = NULL;
     root = BSTInsertion(root, 50);
 	
@@ -106,13 +75,12 @@ int main()
     BSTInsertion(root, 80);
     BSTInsertion(root, 90);
     BSTInsertion(root, 10);
-    BSTInsertion(root, 25);
-    BSTInsertion(root, 35);
+    cout<<"preorder before mirror \n";
+    preOrder(root);
+    mirrorTree(root);
 
-
-	cout<<"All root to leaf paths \n";
-
-	printAllRootToLeadPaths(root, "");
+    cout<<"\n After Mirroring of tree \n";
+    preOrder(root);
 
 	return 0;
 }
