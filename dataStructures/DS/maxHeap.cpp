@@ -54,6 +54,19 @@ void maxHeapIfy(struct Heap* heap,  int index){
 		maxHeapIfy(heap, max); 
 	}
 }
+/**
+	P.No => 203
+**/
+void printElementsGreaterThenGiven(struct Heap* heap,int index,int data){
+	if(heap->array[index] > data){
+		cout<<heap->array[index]<<", ";
+		int left = getChild(heap, index,'L');
+		int right = getChild(heap, index, 'R');
+		printElementsGreaterThenGiven(heap, left, data);
+		printElementsGreaterThenGiven(heap, right, data);
+
+	}
+}
 
 int deleteElement(struct Heap* heap){
 	if(heap->count == 0) return -1;
@@ -131,6 +144,9 @@ int main(){
 
 	cout<<"\nAfter delete \n";
 	printHeapArray(heap);
+
+	cout<<"\nNumbers less then \n";
+	printElementsGreaterThenGiven(heap, 0, 9);
 
 
 

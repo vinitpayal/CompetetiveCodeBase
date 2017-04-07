@@ -331,7 +331,7 @@ int main()
 
 		}
 		
-		cout<<i++<<" : "<<median<<endl;		// heap.getMedian(heap);
+		cout<<" : "<<median<<endl;		// heap.getMedian(heap);
 
 		
 	}
