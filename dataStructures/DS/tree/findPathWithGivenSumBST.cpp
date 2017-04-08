@@ -3,7 +3,7 @@
 	 bcz of g++ version
 **/
 /**
-	https://repl.it/HAqy
+	https://repl.it/HAqy/
 **/
 #include <iostream>
 #include <stdlib.h>
