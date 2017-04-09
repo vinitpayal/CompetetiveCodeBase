@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cstdlib>
+#include <queue>
 using namespace std;
 
 struct graph{
@@ -48,7 +49,7 @@ void printGraph(struct graph* g){
 
 void dfs(struct graph* g, int n, bool* visited){
 	if(!visited[n]){
-		cout<<n<<" ,";
+		cout<<n<<",";
 		visited[n] = true;
 
 		vector<int>::iterator it;
@@ -59,7 +60,34 @@ void dfs(struct graph* g, int n, bool* visited){
 	}
 }
 
+void bfs(struct graph* g, int startingNode, bool* visited){
 
+	queue<int> q;
+
+	q.push(startingNode);
+
+	int currNode;
+
+	while(!q.empty()){
+		currNode = q.front();
+		q.pop();
+
+		if(!visited[currNode]){
+			visited[currNode] = true;
+			cout<<currNode<<",";
+
+			vector<int> nodesConnectedToCurrNode = g->adl[currNode];
+
+			vector<int>::iterator it;
+
+			for(it = nodesConnectedToCurrNode.begin(); it != nodesConnectedToCurrNode.end(); ++it){
+				if(!visited[*it]){
+					q.push(*it);
+				}
+			}
+		}
+	}
+}		
 
 int main(){
 
@@ -67,6 +95,7 @@ int main(){
 
 	struct graph* g = createGraph(graphCapacity);
 	bool visited[graphCapacity] = {false}; 
+	bool bfsVisited[graphCapacity] = {false};
 	
 	addEdge(g, 0, 1);
     addEdge(g, 0, 2);
@@ -79,5 +108,8 @@ int main(){
 
 	dfs(g, 2, visited);
 
+	cout<<"\n bfs \n";
+
+	bfs(g, 2, bfsVisited);
 	return 0;
 }
