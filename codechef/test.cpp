@@ -1,5 +1,5 @@
 /*input
-10
+12
 */
 #include<iostream>
 using namespace std;
