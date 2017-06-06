@@ -21,7 +21,6 @@ int charToInt(char c){
 		case '7' : return 7;
 		case '8' : return 8;
 		case '9' : return 9;
-
 	}
 }
 
