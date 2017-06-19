@@ -2,13 +2,14 @@
 300
 */
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
 int main()
 {
 	//Number till where we have to find primes
-	int n, j;
+	int n, j, m;
 	cin>>n;
 
 	bool primes[n+1];
@@ -17,11 +18,13 @@ int main()
 		primes[i] = true;
 	}
 
+	m = sqrt(n);
+
 	primes[0] = false;
 	primes[1] = false;
 	primes[2] = true;
 
-	for(int i = 2; i <= n; i++){
+	for(int i = 2; i <= m; i++){
 
 		j = 2;
 
