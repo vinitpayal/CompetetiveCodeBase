@@ -9,7 +9,7 @@ void printArray(int A[], int len){
 }
 
 void mergeArrays(int A[], int l, int m, int r){
-
+	cout<<"\nMerging "<<l<<" -> "<<m<<" & "<<m+1<<" -> "<<r;
 	int s = l; 
 	int lTemp[m-l+1];
 	int rTemp[r-m];
@@ -52,6 +52,7 @@ void mergeArrays(int A[], int l, int m, int r){
 
 
 void mergeSort(int A[], int l, int r){
+	cout<<"\nCalled for l ="<<l<<" & r= "<<r;
 	if(r > l){
 		int mid = (l + r)/2;
 		mergeSort(A, l, mid);
@@ -65,13 +66,13 @@ void mergeSort(int A[], int l, int r){
 
 int main(){
 
-	int ip[11] = {1,2,4,5,-8,3,16,7,-9, 10, 0};
+	int ip[11] = {3,1,2};
 	
 	cout<<"Before Sorting \n";
-	printArray(ip, 11);
+	printArray(ip, 3);
 
-	mergeSort(ip,0,10);
+	mergeSort(ip,0,2);
 
 	cout<<"\nAfter Sorting\n";
-	printArray(ip,11);
+	printArray(ip,3);
 }
