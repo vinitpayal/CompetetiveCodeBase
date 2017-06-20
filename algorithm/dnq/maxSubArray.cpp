@@ -1,9 +1,17 @@
+/*
+	Divide And Conquer
+	Finding sub array with maximum sum
+	Time Complexity -> O(n*log(n))
+
+*/
+
 #include <iostream>
 #include <algorithm>
 #include <climits>
 
 using namespace std;
 
+//Time Complexity = O(n)
 int crossMaxArraySum(int A[], int low, int mid, int high){
 	int leftSum = INT_MIN;
 
@@ -35,6 +43,7 @@ int crossMaxArraySum(int A[], int low, int mid, int high){
 	return leftSum + rigthSum;
 }
 
+//Time Complexity log(n) * n => here n for finding crossMaxArraySum
 int maxSubArraySum(int A[], int low, int high){
 
 	if(low == high) return A[low];
