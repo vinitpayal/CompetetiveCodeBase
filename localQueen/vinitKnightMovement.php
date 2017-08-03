@@ -1,4 +1,7 @@
 <?php
+/**
+ * @author vinit payal
+ */
 
 /**
  * Coordinates Sequence
@@ -17,6 +20,7 @@
  * Instructions To Run :-
  *
  *       --> If PHP is installed just download this file and on command line execute php and name of file.
+ *          For Example :- php nameOfFile.php(php vinitKnightMovement.php )
  *      --> Otherwise for online compiling use https://repl.it/JwF8/0 or http://ideone.com/CVzReS link.
  *
  * Instructions to test with various Inputs :-
@@ -24,7 +28,12 @@
  *      ---> To changing first player's initial point find for $player1->setCurrPosition(2,1);
  *          and change the numeric numbers with your inputs same thing can be done for player2 also.
  *      --> You can also change the name of players by changing $player1->setName("Vinit");
+ *
+ * Assumptions :-
+ *          --> First move will be made by first player
+ *          --> Chess Board is of size 8 x 8
  */
+
 
 class Chess{
 	/*
@@ -232,6 +241,16 @@ $player2->setCurrPosition(2,1);
 $p1Curr = $player1->getCurrPosition();
 $p2Curr = $player2->getCurrPosition();
 
+$someOneIsAlreadyOnFinalDestination = false;
+if($p1Curr['x'] == 7 && $p1Curr['y'] == 7){
+    $someOneIsAlreadyOnFinalDestination = true;
+    echo $player1->getName()." won as he is already on destination\n";
+}
+elseif ($p2Curr['x'] == 7 && $p2Curr['y'] == 7){
+    $someOneIsAlreadyOnFinalDestination = true;
+    echo $player2->getName()." won as he is already on destination\n";
+}
+
 $queueForP1 = new Queue();
 $queueForP2 = new Queue();
 
@@ -258,7 +277,7 @@ $currTurn = 1;
 $horse1CurrentMove = 0;
 $horse2CurrentMove = 0;
 
-while(1){
+while(!$someOneIsAlreadyOnFinalDestination){
     if($currTurn == 1) {
         while (true) {
 
