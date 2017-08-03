@@ -20,7 +20,7 @@
  * Instructions To Run :-
  *
  *       --> If PHP is installed just download this file and on command line execute php and name of file.
- *          For Example :- php nameOfFile.php(php vinitKnightMovement.php )
+ *          For Example :- php nameOfFile.php
  *      --> Otherwise for online compiling use https://repl.it/JwF8/0 or http://ideone.com/CVzReS link.
  *
  * Instructions to test with various Inputs :-
@@ -36,170 +36,170 @@
 
 
 class Chess{
-	/*
-	Here 1 denote to black cell and 0 denote to white cell
-	and -1 denotes obstacle
-	*/
-	private $chessBoard = array(array());
+    /*
+    Here 1 denote to black cell and 0 denote to white cell
+    and -1 denotes obstacle
+    */
+    private $chessBoard = array(array());
 
-	function getCellValue($outerIndex, $innerIndex){
-		if(($outerIndex%2 == 0 && $innerIndex % 2 != 0) || ($outerIndex%2 != 0 && $innerIndex % 2 == 0)){
-			return 1;
-		}
-		else if(($outerIndex%2 == 0 && $innerIndex % 2 == 0) || ($outerIndex%2 != 0 && $innerIndex % 2 != 0)){
-			return 0;
-		}
-	}
+    function getCellValue($outerIndex, $innerIndex){
+        if(($outerIndex%2 == 0 && $innerIndex % 2 != 0) || ($outerIndex%2 != 0 && $innerIndex % 2 == 0)){
+            return 1;
+        }
+        else if(($outerIndex%2 == 0 && $innerIndex % 2 == 0) || ($outerIndex%2 != 0 && $innerIndex % 2 != 0)){
+            return 0;
+        }
+    }
 
-	function __construct(){
+    function __construct(){
 
-		//Intialize chess board elements
-		for($outerIndex = 0; $outerIndex <= 7; $outerIndex++){
-		  	$currRow = array();
-			for($innerIndex = 0; $innerIndex <= 7; $innerIndex++){
-				$currRow[$innerIndex] = $this->getCellValue($outerIndex, $innerIndex);
-			}
-	
-			$this->chessBoard[$outerIndex] = $currRow;
-		}
-	}
+        //Intialize chess board elements
+        for($outerIndex = 0; $outerIndex <= 7; $outerIndex++){
+            $currRow = array();
+            for($innerIndex = 0; $innerIndex <= 7; $innerIndex++){
+                $currRow[$innerIndex] = $this->getCellValue($outerIndex, $innerIndex);
+            }
 
-	function printChessBoard(){
-		for($outerIndex = 0; $outerIndex <= 7; $outerIndex++){
-			for($innerIndex = 0; $innerIndex <= 7; $innerIndex++){
-			  
-				echo $this->chessBoard[$outerIndex][$innerIndex]." ";
-				
-			}
+            $this->chessBoard[$outerIndex] = $currRow;
+        }
+    }
 
-			echo "\n";
-		}
-	}
+    function printChessBoard(){
+        for($outerIndex = 0; $outerIndex <= 7; $outerIndex++){
+            for($innerIndex = 0; $innerIndex <= 7; $innerIndex++){
 
-	function markCellAsObstacle($x, $y){
-		$this->chessBoard[$x][$y] = -1;
-	}
+                echo $this->chessBoard[$outerIndex][$innerIndex]." ";
 
-	function removeObstacle($x, $y){
-		$this->chessBoard[$x][$y] = $this->getCellValue($x, $y);
-	}
+            }
 
-	function nextMove(){
-		return [
-			['x' => 2, 'y' => 1],
-			['x' => 2, 'y' => -1],
-			['x' => -2, 'y' =>1],
-			['x' => -2, 'y' => -1],
-			['x' => 1, 'y' => 2],
-			['x' => 1, 'y' => -2],
-			['x' => -1, 'y' =>2],
-			['x' => -1, 'y' => -2]
-			
-		];
-	}
-	function isValidMove($x, $y){
-		 return ($x >= 0 && $x <= 7 && $y >= 0 && $y <= 7 && $this->chessBoard[$x][$y] != -1);
-	}
+            echo "\n";
+        }
+    }
 
-	function applyNextPossibleMoves($x, $y){
+    function markCellAsObstacle($x, $y){
+        $this->chessBoard[$x][$y] = -1;
+    }
 
-		$validMoveResults = array();
-		$allPossibleMoves = $this->nextMove();
+    function removeObstacle($x, $y){
+        $this->chessBoard[$x][$y] = $this->getCellValue($x, $y);
+    }
 
-		foreach ($allPossibleMoves as $moveArray) {
-			$newX = $x + $moveArray['x'];
-			$newY = $y  + $moveArray['y'];
+    function nextMove(){
+        return [
+            ['x' => 2, 'y' => 1],
+            ['x' => 2, 'y' => -1],
+            ['x' => -2, 'y' =>1],
+            ['x' => -2, 'y' => -1],
+            ['x' => 1, 'y' => 2],
+            ['x' => 1, 'y' => -2],
+            ['x' => -1, 'y' =>2],
+            ['x' => -1, 'y' => -2]
 
-			if($this->isValidMove($newX, $newY)){
-				array_push($validMoveResults, ['x' => $newX, 'y' => $newY]);
-			}
-		}
+        ];
+    }
+    function isValidMove($x, $y){
+        return ($x >= 0 && $x <= 7 && $y >= 0 && $y <= 7 && $this->chessBoard[$x][$y] != -1);
+    }
 
-		return $validMoveResults;
-	}
+    function applyNextPossibleMoves($x, $y){
+
+        $validMoveResults = array();
+        $allPossibleMoves = $this->nextMove();
+
+        foreach ($allPossibleMoves as $moveArray) {
+            $newX = $x + $moveArray['x'];
+            $newY = $y  + $moveArray['y'];
+
+            if($this->isValidMove($newX, $newY)){
+                array_push($validMoveResults, ['x' => $newX, 'y' => $newY]);
+            }
+        }
+
+        return $validMoveResults;
+    }
 }
 
 class Player{
-	private $name;
-	private $currPos = ["x" => 0, "y" => 0];
+    private $name;
+    private $currPos = ["x" => 0, "y" => 0];
 
-	function getName(){
-		return $this->name;
-	}
+    function getName(){
+        return $this->name;
+    }
 
-	function setName($name){
-		$this->name = $name;
-	}
+    function setName($name){
+        $this->name = $name;
+    }
 
-	function setCurrPosition($row, $column){
-		$this->currPos["x"] = $row;
-		$this->currPos["y"] = $column;
-	}
+    function setCurrPosition($row, $column){
+        $this->currPos["x"] = $row;
+        $this->currPos["y"] = $column;
+    }
 
-	function getCurrPosition(){
-		return $this->currPos;
-	}
+    function getCurrPosition(){
+        return $this->currPos;
+    }
 }
 
 class QueueElement{
-  public $value;
-  public $next;
+    public $value;
+    public $next;
 }
 
 //Customized Queue class for customized BFS
 class Queue{
-  private $front = null;
-  private $back = null;
+    private $front = null;
+    private $back = null;
 
-  public function isEmpty(){
-    return $this->front == null;
-  }
-
-  public function enqueue($value){
-     $oldBack = $this->back;
-     $this->back = new QueueElement(); 
-     $this->back->value = $value;
-     if($this->isEmpty()){
-       $this->front = $this->back; 
-     }else{
-       $oldBack->next = $this->back;
-     }
-  }
-
-  public function getFront(){
-      if($this->isEmpty()){
-          return null;
-      }
-      $frontValue = $this->front->value;
-      return $frontValue;
-  }
-
-  public function dequeue(){
-    if($this->isEmpty()){
-      return null; 
+    public function isEmpty(){
+        return $this->front == null;
     }
-    $removedValue = $this->front->value;
-    $this->front = $this->front->next;
-    return $removedValue;
-  }
+
+    public function enqueue($value){
+        $oldBack = $this->back;
+        $this->back = new QueueElement();
+        $this->back->value = $value;
+        if($this->isEmpty()){
+            $this->front = $this->back;
+        }else{
+            $oldBack->next = $this->back;
+        }
+    }
+
+    public function getFront(){
+        if($this->isEmpty()){
+            return null;
+        }
+        $frontValue = $this->front->value;
+        return $frontValue;
+    }
+
+    public function dequeue(){
+        if($this->isEmpty()){
+            return null;
+        }
+        $removedValue = $this->front->value;
+        $this->front = $this->front->next;
+        return $removedValue;
+    }
 }
 
 class Position{
-	private $xCoordinate = 0;
-	private $yCoordinate = 0;
-	public  $path = "";
+    private $xCoordinate = 0;
+    private $yCoordinate = 0;
+    public  $path = "";
 
-	public function __construct($x, $y) {
-	    $this->xCoordinate = $x;
-	    $this->yCoordinate = $y;
-	}
+    public function __construct($x, $y) {
+        $this->xCoordinate = $x;
+        $this->yCoordinate = $y;
+    }
 
-	public function getPosition(){
-		return [
-		'x' => $this->xCoordinate,
-		'y' => $this->yCoordinate,
-		];
-	}
+    public function getPosition(){
+        return [
+            'x' => $this->xCoordinate,
+            'y' => $this->yCoordinate,
+        ];
+    }
 }
 
 class Distance{
@@ -226,8 +226,8 @@ class Distance{
 }
 
 /**
-    Chess board creation and players creation
-**/
+Chess board creation and players creation
+ **/
 $chessObj = new Chess();
 
 $player1 = new Player();
@@ -308,7 +308,7 @@ while(!$someOneIsAlreadyOnFinalDestination){
                     echo $player1->getName()." Won and number of steps required are " . ($currHorse1Steps + 1) . "\n";
                     echo "----------------------------------------------------------------\n";
                     echo " Path Followed is ".$posObj->path."-->(".$newXCoordinate.",".$newYCoordinate.")\n";
-                    
+
                     return;
                 }
 
@@ -357,7 +357,7 @@ while(!$someOneIsAlreadyOnFinalDestination){
                 if ($newXCoordinate == 7 && $newYCoordinate == 7) {
 
                     echo "----------------------------------------------------------------\n";
-                    echo $player1->getName()." Won and number of steps required are " . ($currHorse2Steps + 1) . "\n";
+                    echo $player2->getName()." Won and number of steps required are " . ($currHorse2Steps + 1) . "\n";
                     echo "----------------------------------------------------------------\n";
                     echo "Path Followed is ".$posObj->path."-->(".$newXCoordinate.",".$newYCoordinate.")\n";
                     echo "----------------------------------------------------------------\n\n";
