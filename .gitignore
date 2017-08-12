@@ -3,6 +3,8 @@
 
 # Unignore all with extensions
 !*.*
+*.class
+*.iml
 
 # Unignore all dirs
 !*/
