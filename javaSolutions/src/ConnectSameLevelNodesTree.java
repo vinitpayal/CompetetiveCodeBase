@@ -1,3 +1,7 @@
+/**
+ solution at http://practice.geeksforgeeks.org/problems/connect-nodes-at-same-level/1
+ **/
+
 import java.util.LinkedList;
 import java.util.Queue;
 
