@@ -66,9 +66,20 @@ class TreeSymmetric{
         rootNode.right.right.right = new Node(5);
         rootNode.right.right.left= new Node(6);
 
-        BinaryTree bt = new BinaryTree(rootNode);
+        Node rootNode1 = new Node(100);
 
-        System.out.println(new ActualWorker(rootNode).treeSymmetryCheck(bt.rootNode.left, bt.rootNode.right));
+        rootNode1.left = new Node(10);
+        rootNode1.right = new Node(10);
+
+        rootNode1.left.left = new Node(20);
+        rootNode1.left.right = new Node(20);
+
+        rootNode1.right.left = new Node(20);
+        rootNode1.right.right = new Node(20);
+
+        BinaryTree bt = new BinaryTree(rootNode1);
+
+        System.out.println(new ActualWorker(rootNode1).treeSymmetryCheck(bt.rootNode.left, bt.rootNode.right));
 
     }
 }
