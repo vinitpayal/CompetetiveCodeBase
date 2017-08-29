@@ -4,18 +4,24 @@ import java.io.*;
 
 import java.util.Scanner;
 
-class GFG{
+class PathsCountInMatrix{
 
-    public static int pathsCount = 0;
-
-    static void countOfPaths(int currX,int currY, int n, int m){
-        if(currX > n-1 || currY > m-1|| currX < 0 || currY < 0) return;
+    static int countOfPaths(int currX, int currY, int n, int m, int[][] memoized){
+        if(currX > n-1 || currY > m-1|| currX < 0 || currY < 0) return 0;
         if(currX == n-1 && currY == m-1){
-            pathsCount++;
+            return 1;
         }
 
-        countOfPaths(currX+1,currY,n,m);
-        countOfPaths(currX, currY+1,n,m);
+        if(memoized[currX][currY] > 0) {
+            return memoized[currX][currY];
+        }
+
+        int downFirstCount = countOfPaths(currX+1,currY,n,m, memoized);
+        int rightFirstCount = countOfPaths(currX,currY+1,n,m,memoized);
+
+        memoized[currX][currY] = downFirstCount+rightFirstCount;
+
+        return downFirstCount+rightFirstCount;
     }
 
     public static void main(String[] args) {
@@ -27,13 +33,12 @@ class GFG{
         t = sc.nextInt();
 
         while (t-- > 0){
-            pathsCount = 0;
             n = sc.nextInt();
             m = sc.nextInt();
 
-            countOfPaths(0,0,n,m);
+            int [][] memoized = new int[n][m];
 
-            System.out.println(pathsCount);
+            System.out.println(countOfPaths(0,0,n,m,memoized));
         }
 
     }
