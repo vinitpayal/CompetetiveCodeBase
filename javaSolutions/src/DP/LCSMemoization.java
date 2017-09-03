@@ -27,13 +27,6 @@ class ActualWorker{
     }
 }
 
-public class DriverClass{
-    public static void main(String[] args) {
-        Map<String,Integer> memoizeMap=new HashMap<String,Integer>();
-        System.out.println(new ActualWorker().findLcs("ABCDGH","AEDFHR",memoizeMap));
-    }
-}
-
 public class LcsMemoization{
 
     public static void main(String[] args) {
